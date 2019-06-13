@@ -1,0 +1,22 @@
+#Generates a wall of cubes with a height = int, lenght = int, and random colors = list of floats(from 0 to 1).
+#Initial location at (0,0,0) and cube dimensions = (1,1,1)
+import bpy
+import random
+#Wall building Function
+def Trump(height, lenght, colors):
+    #Variables
+    x = 0
+    z = 0
+    #loop
+    while z <= lenght:
+        if x <= height:
+            mat = bpy.data.materials.new(name="Material")
+            mat.diffuse_color = (random.choice(colors), 
+            random.choice(colors), random.choice(colors))
+            bpy.ops.mesh.primitive_cube_add(location =(0,z,x))
+            bpy.context.active_object.dimensions = (1,1,1)
+            bpy.context.active_object.data.materials.append(mat)
+            x +=  1
+        else:
+            x = 0
+            z += 1
