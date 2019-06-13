@@ -1,0 +1,23 @@
+#Generates vertical Torus that spins, with a list of radius (float list for all radius), rotation = float(radians) and
+#a color in RGB format = (0.1,0.1,0.1) al location (0,0,0).
+#The samaller the faster it spins, controled by spin = float(radians).
+#The torus spins 125 frames in each direction on the x vector.
+import bpy
+
+def torusrotx(radius, rotation, color, spin):
+    mat = bpy.data.materials.new(name="Material")
+    mat.diffuse_color = (color)
+    mat.diffuse_intensity = 1
+
+    for x in radius:
+        bpy.ops.mesh.primitive_torus_add(rotation=(0, 1.5708, 0), location=(0, 0, 0), 
+        major_radius=x, minor_radius=0.25, abso_major_rad=0, abso_minor_rad=0)
+        bpy.context.active_object.data.materials.append(mat)
+
+        bpy.context.object.keyframe_insert("rotation_euler", frame=1)
+        bpy.context.object.rotation_euler = (rotation, 1.5708, 0)
+        bpy.context.object.keyframe_insert("rotation_euler", frame=125)
+        bpy.context.object.rotation_euler = (0, 1.5708, 0)
+        bpy.context.object.keyframe_insert("rotation_euler", frame=250)
+    
+        rotation += spin
