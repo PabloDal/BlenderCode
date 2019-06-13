@@ -1,0 +1,12 @@
+#Render the scene as an AVI with a start frame and 
+#end frame = int and resolution x, y = int, with a 
+#filepath = path as a str
+import bpy
+def renderAVIJPEG(start_frame, end_frame, x, y, path):
+    bpy.context.scene.render.image_settings.file_format = 'AVI_JPEG'
+    bpy.context.scene.frame_start = start_frame
+    bpy.context.scene.frame_end = end_frame
+    bpy.context.scene.render.resolution_x = x
+    bpy.context.scene.render.resolution_y = y
+    bpy.context.scene.render.filepath = path
+    bpy.ops.render.render(animation=True, write_still=True)
