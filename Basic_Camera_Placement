@@ -1,0 +1,6 @@
+#Generates a camera al location = list of floats (x,y,z) and 
+#rotation = list of floats (x,y,z) in radians.
+import bpy
+def camera(location, rotation):
+    bpy.ops.object.camera_add(view_align=True, location=location,
+    rotation=rotation)
